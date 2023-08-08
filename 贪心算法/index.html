@@ -42,7 +42,7 @@
     let total_space = m
     for (let i = 0; i < pro.length - 1; i++) {
       for (let j = 0; j < pro.length - 1 - i; j++) {
-        if (pro[j][0] - pro[j][1] < pro[j + 1][0] / pro[j + 1][1]) {
+        if (pro[j][0] - pro[j][1] < pro[j + 1][0] - pro[j + 1][1]) {
           let temp = pro[j]
           pro[j] = pro[j + 1]
           pro[j + 1] = temp
