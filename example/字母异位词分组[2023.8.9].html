@@ -96,7 +96,14 @@
    * @return {string[][]}
    */
   var groupAnagrams1 = function(strs) {
-
+    const strMap = new Map()
+    for (const str of strs) {
+      const strArr = Array.from(str).sort().toString()
+      const list = strMap.get(strArr) ? strMap.get(strArr) : []
+      list.push(str)
+      strMap.set(strArr, list)
+    }
+    return Array.from(strMap.values())
   };
 
   console.log(groupAnagrams1(["eat", "tea", "tan", "ate", "nat", "bat"]))
