@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>字母异位词分组</title>
+</head>
+<body>
+<script>
+
+  // 给你一个字符串数组，请你将 字母异位词 组合在一起。可以按任意顺序返回结果列表。
+
+ // 字母异位词 是由重新排列源单词的所有字母得到的一个新单词。
+
+  // 输入: strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+  // 输出: [["bat"],["nat","tan"],["ate","eat","tea"]]
+
+  // 输入: strs = [""]
+  // 输出: [[""]]
+
+  // 输入: strs = ["a"]
+  // 输出: [["a"]]
+
+  /**
+   * @param {string[]} strs
+   * @return {string[][]}
+   */
+  var groupAnagrams = function(strs) {
+    const codeMap = {
+      a: 2,
+      b: 3,
+      c: 5,
+      d: 7,
+      e: 11,
+      f: 13,
+      g: 17,
+      h: 19,
+      i: 23,
+      j: 29,
+      k: 31,
+      l: 37,
+      m: 41,
+      n: 43,
+      o: 47,
+      p: 53,
+      q: 59,
+      r: 61,
+      s: 67,
+      t:71,
+      u:73,
+      v:79,
+      w:83,
+      x:89,
+      y:97,
+      z:101
+    }
+    const newStrs = []
+    const cloneStrs = Array(strs.length).fill(0)
+    if (strs.length <= 1) return [strs]
+    for(let i = 0; i < strs.length; i++) {
+      let num = 1
+      for (const ele of strs[i].split('')) {
+        num *= codeMap[ele]
+      }
+      cloneStrs[i] = num
+    }
+
+    const hasStr = []
+    for (let i = 0; i < cloneStrs.length; i++) {
+      const b= []
+      if (!hasStr.includes(strs[i])) {
+        hasStr.push(strs[i])
+        b.push(strs[i])
+        for (let j = i + 1; j<cloneStrs.length; j++) {
+          if (cloneStrs[i] == cloneStrs[j]) {
+            hasStr.push(strs[j])
+            b.push(strs[j])
+          }
+        }
+        newStrs.push(b)
+      }
+    }
+    return newStrs
+  };
+
+  console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]))
+
+  // 308ms 48.9m
+
+  // 总结： 常规解题思路 创建一个字母表 利用质数乘积唯一性质
+  // 性能： 循环嵌套丢失性能
+  // 优化方案： 利用Map性质 以及 unicode排序
+
+  // 方案2
+  /**
+   * @param {string[]} strs
+   * @return {string[][]}
+   */
+  var groupAnagrams1 = function(strs) {
+
+  };
+
+  console.log(groupAnagrams1(["eat", "tea", "tan", "ate", "nat", "bat"]))
+</script>
+</body>
+</html>
